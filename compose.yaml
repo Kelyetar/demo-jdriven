@@ -7,3 +7,13 @@ services:
       - 'POSTGRES_USER=myuser'
     ports:
       - '5432'
+
+  demo-jdriven:
+    image: demo-jdriven:0.0.1-SNAPSHOT
+
+  wiremock:
+    image: "wiremock/wiremock:latest"
+    container_name: my_wiremock
+    volumes:
+      - ./mappings:/home/wiremock/mappings
+    entrypoint: [ "/docker-entrypoint.sh", "--global-response-templating", "--disable-gzip", "--verbose" ]

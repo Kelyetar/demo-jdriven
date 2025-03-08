@@ -1,0 +1,11 @@
+{
+  "request": {
+    "urlPath": "/templated"
+  },
+  "response": {
+    "body": "{{request.path.[0]}}",
+    "transformers": [
+      "response-template"
+    ]
+  }
+}
