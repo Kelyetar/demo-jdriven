@@ -18,6 +18,6 @@ public class ApplicationRunner implements org.springframework.boot.ApplicationRu
 
     @Override
     public void run(ApplicationArguments args) {
-        log.info(articleClient.get(UUID.randomUUID()).toString());
+        log.info(articleClient.getSingle(UUID.randomUUID()).toString());
     }
 }

@@ -9,9 +9,10 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.client.RestTemplate;
 import personal.nieuwdorp.demojdriven.client.domain.Article;
 
+import java.util.Collection;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @WireMockTest
 class ArticleClientTest {
@@ -30,7 +31,13 @@ class ArticleClientTest {
     @Test
     void getSingle() {
         UUID randomUUID = UUID.randomUUID();
-        Article article = articleClient.get(randomUUID);
+        Article article = articleClient.getSingle(randomUUID);
         assertEquals(randomUUID, article.getUuid());
+    }
+
+    @Test
+    void getAll() {
+        Collection<Article> articles = articleClient.getAll();
+        assertEquals(3, articles.size());
     }
 }
