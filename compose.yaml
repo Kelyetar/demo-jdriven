@@ -10,10 +10,14 @@ services:
 
   demo-jdriven:
     image: demo-jdriven:0.0.1-SNAPSHOT
-
+    depends_on:
+      wiremock:
+        condition: service_healthy
+    environment:
+      - client.root.uri=http://wiremock:8080
+  
   wiremock:
     image: "wiremock/wiremock:latest"
-    container_name: my_wiremock
     volumes:
       - ./mappings:/home/wiremock/mappings
     entrypoint: [ "/docker-entrypoint.sh", "--global-response-templating", "--disable-gzip", "--verbose" ]

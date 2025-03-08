@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPathTemplate" : "/article/{uuid}"
+  },
+  "response": {
+    "body": "{ \"uuid\": \"{{request.path.uuid}}\", \"price\": {{randomDecimal lower=00.1 upper=20.90}} }",
+    "transformers": [
+      "response-template"
+    ],
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
