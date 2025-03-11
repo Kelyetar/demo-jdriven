@@ -10,6 +10,8 @@ services:
 
   demo-jdriven:
     image: demo-jdriven:0.0.1-SNAPSHOT
+    ports:
+      - "18080:8080"
     depends_on:
       wiremock:
         condition: service_healthy

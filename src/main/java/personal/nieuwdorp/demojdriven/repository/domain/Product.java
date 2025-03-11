@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-public class Article {
+public class Product {
     @Id
     private UUID uuid;
     private BigDecimal price;

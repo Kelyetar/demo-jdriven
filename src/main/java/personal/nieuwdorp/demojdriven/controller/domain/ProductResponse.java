@@ -1,4 +1,4 @@
-package personal.nieuwdorp.demojdriven.client.domain;
+package personal.nieuwdorp.demojdriven.controller.domain;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
-public class Article {
+public class ProductResponse {
     private UUID uuid;
     private BigDecimal price;
 }

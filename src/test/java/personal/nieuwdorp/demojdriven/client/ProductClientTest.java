@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.client.RestTemplate;
-import personal.nieuwdorp.demojdriven.client.domain.Article;
+import personal.nieuwdorp.demojdriven.client.domain.Product;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -15,9 +15,8 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @WireMockTest
-class ArticleClientTest {
-
-    private ArticleClient articleClient;
+class ProductClientTest {
+    private ProductClient productClient;
 
     @BeforeEach
     void setUp(WireMockRuntimeInfo wmRuntimeInfo) {
@@ -25,19 +24,19 @@ class ArticleClientTest {
         wireMock.loadMappingsFrom("src");
         RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
         RestTemplate restTemplate = restTemplateBuilder.rootUri(wmRuntimeInfo.getHttpBaseUrl()).build();
-        articleClient = new ArticleClient(restTemplate);
+        productClient = new ProductClient(restTemplate);
     }
 
     @Test
     void getSingle() {
         UUID randomUUID = UUID.randomUUID();
-        Article article = articleClient.getSingle(randomUUID);
-        assertEquals(randomUUID, article.getUuid());
+        Product product = productClient.getSingle(randomUUID);
+        assertEquals(randomUUID, product.getUuid());
     }
 
     @Test
     void getAll() {
-        Collection<Article> articles = articleClient.getAll();
-        assertEquals(3, articles.size());
+        Collection<Product> products = productClient.getAll();
+        assertEquals(3, products.size());
     }
 }

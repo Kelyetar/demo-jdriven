@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "urlPathTemplate": "/article"
+    "urlPathTemplate": "/product"
   },
   "response": {
     "body": "[{ \"uuid\": \"dcf630aa-54c3-4c39-98b9-eca22ec2670c\", \"price\": {{randomDecimal lower=0.01 upper=20.90}} },{ \"uuid\": \"8855d7aa-273a-4fac-acdf-23e7834d3d39\", \"price\": {{randomDecimal lower=0.01 upper=20.90}} },{ \"uuid\": \"f95ddb59-86c8-43ad-9e74-a68222dcd434\", \"price\": {{randomDecimal lower=0.01 upper=20.90}} }]",
