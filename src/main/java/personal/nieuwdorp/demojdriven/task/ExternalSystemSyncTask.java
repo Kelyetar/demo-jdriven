@@ -25,6 +25,7 @@ class ExternalSystemSyncTask implements Runnable {
         personal.nieuwdorp.demojdriven.repository.domain.Product product = new personal.nieuwdorp.demojdriven.repository.domain.Product();
         product.setUuid(productFromExternalSystem.getUuid());
         product.setPrice(productFromExternalSystem.getPrice().setScale(2, RoundingMode.HALF_EVEN));
+        product.setName(productFromExternalSystem.getName());
         return product;
     }
 

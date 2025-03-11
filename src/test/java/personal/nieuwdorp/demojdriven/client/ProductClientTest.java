@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 import personal.nieuwdorp.demojdriven.client.domain.Product;
 
 import java.util.Collection;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,22 +20,15 @@ class ProductClientTest {
     @BeforeEach
     void setUp(WireMockRuntimeInfo wmRuntimeInfo) {
         WireMock wireMock = wmRuntimeInfo.getWireMock();
-        wireMock.loadMappingsFrom("src");
+        wireMock.loadMappingsFrom("src/wiremock");
         RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
         RestTemplate restTemplate = restTemplateBuilder.rootUri(wmRuntimeInfo.getHttpBaseUrl()).build();
         productClient = new ProductClient(restTemplate);
     }
 
     @Test
-    void getSingle() {
-        UUID randomUUID = UUID.randomUUID();
-        Product product = productClient.getSingle(randomUUID);
-        assertEquals(randomUUID, product.getUuid());
-    }
-
-    @Test
     void getAll() {
         Collection<Product> products = productClient.getAll();
-        assertEquals(3, products.size());
+        assertEquals(6, products.size());
     }
 }

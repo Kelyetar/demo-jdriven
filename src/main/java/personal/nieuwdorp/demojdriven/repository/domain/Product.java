@@ -13,4 +13,5 @@ public class Product {
     @Id
     private UUID uuid;
     private BigDecimal price;
+    private String name;
 }

@@ -9,4 +9,5 @@ import java.util.UUID;
 public class ProductResponse {
     private UUID uuid;
     private BigDecimal price;
+    private String name;
 }

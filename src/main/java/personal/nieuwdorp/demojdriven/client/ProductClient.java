@@ -7,7 +7,6 @@ import personal.nieuwdorp.demojdriven.client.domain.Product;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 @Service
 public class ProductClient {
@@ -16,10 +15,6 @@ public class ProductClient {
 
     public ProductClient(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
-    }
-
-    public Product getSingle(UUID uuid) {
-        return restTemplate.getForObject("/%s/%s".formatted(PRODUCT, uuid.toString()), Product.class);
     }
 
     public Collection<Product> getAll() {

@@ -1,10 +1,10 @@
 {
   "request": {
     "method": "GET",
-    "urlPathTemplate": "/product/{uuid}"
+    "urlPathTemplate": "/product"
   },
   "response": {
-    "body": "{ \"uuid\": \"{{request.path.uuid}}\", \"price\": {{randomDecimal lower=00.1 upper=20.90}} }",
+    "bodyFileName": "products.json.hbs",
     "transformers": [
       "response-template"
     ],

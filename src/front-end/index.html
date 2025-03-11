@@ -2,8 +2,8 @@
 <html lang="en">
 <body>
 <script>
-    async function getData() {
-        const url = "http://localhost:18080/products";
+    async function getData(queryString) {
+        const url = "http://localhost:18080/find-products?queryString=" + queryString;
         try {
             const response = await fetch(url);
             const json = await response.json();
@@ -12,6 +12,8 @@
             for (var i = 0; i < json.length; i++) {
                 var item = document.createElement('li');
                 item.appendChild(document.createTextNode(json[i].price));
+                item.appendChild(document.createTextNode(" "));
+                item.appendChild(document.createTextNode(json[i].name));
                 items.appendChild(item);
             }
             console.log(json);
@@ -22,6 +24,9 @@
 
 </script>
 <div id="demo">
+    <label>
+        <input oninput="getData(this.value)">
+    </label>
     <button onclick="getData()" type="button">Change Content</button>
 </div>
 <ul id="unordered_list">
