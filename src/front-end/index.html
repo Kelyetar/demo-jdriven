@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<script>
+    async function getData() {
+        const url = "http://localhost:18080/products";
+        try {
+            const response = await fetch(url);
+            const json = await response.json();
+            var items = document.getElementById("unordered_list");
+            items.innerHTML = "";
+            for (var i = 0; i < json.length; i++) {
+                var item = document.createElement('li');
+                item.appendChild(document.createTextNode(json[i].price));
+                items.appendChild(item);
+            }
+            console.log(json);
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+
+</script>
+<div id="demo">
+    <button onclick="getData()" type="button">Change Content</button>
+</div>
+<ul id="unordered_list">
+</ul>
+</body>
+</html> 
