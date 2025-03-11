@@ -15,9 +15,16 @@ services:
     depends_on:
       wiremock:
         condition: service_healthy
+      postgres:
+        condition: service_started
     environment:
       - client.root.uri=http://wiremock:8080
-  
+      - spring.jpa.hibernate.ddl-auto=update
+      - spring.datasource.url=jdbc:postgresql://postgres:5432/mydatabase
+      - spring.datasource.username=myuser
+      - spring.datasource.password=secret
+      - spring.datasource.driver-class-name=org.postgresql.Driver
+
   wiremock:
     image: "wiremock/wiremock:latest"
     volumes:
