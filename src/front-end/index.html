@@ -7,28 +7,30 @@
         try {
             const response = await fetch(url);
             const json = await response.json();
-            var items = document.getElementById("unordered_list");
+            var items = document.getElementById("results_table");
             items.innerHTML = "";
             for (var i = 0; i < json.length; i++) {
-                var item = document.createElement('li');
-                item.appendChild(document.createTextNode(json[i].price));
-                item.appendChild(document.createTextNode(" "));
-                item.appendChild(document.createTextNode(json[i].name));
-                items.appendChild(item);
+                var row = document.createElement('tr');
+                let nameCellElement = document.createElement('td');
+                nameCellElement.appendChild(document.createTextNode(json[i].name));
+                row.appendChild(nameCellElement)
+                let priceCellElement = document.createElement('td');
+                priceCellElement.appendChild(document.createTextNode(json[i].price));
+                row.appendChild(priceCellElement);
+                items.appendChild(row);
             }
             console.log(json);
         } catch (error) {
             console.error(error.message);
         }
     }
-
 </script>
 <div id="demo">
     <label>
-        <input oninput="getData(this.value)">
+        <input autofocus onfocusin="getData(this.value)" onfocusout="getData(this.value)" oninput="getData(this.value)">
     </label>
 </div>
-<ul id="unordered_list">
-</ul>
+<table id="results_table">
+</table>
 </body>
 </html> 

@@ -32,7 +32,7 @@ public class ProductController {
 
     @GetMapping("/find-products")
     Collection<ProductResponse> find(@RequestParam(required = false) String queryString) {
-        if (queryString == null) {
+        if (queryString == null || queryString.isEmpty()) {
             return productProvider.findAll().stream().map(this::convert).collect(Collectors.toList());
         } else {
             String[] searchTerms = queryString.toLowerCase().split("[^a-z]+");
