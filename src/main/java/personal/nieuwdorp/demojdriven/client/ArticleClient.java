@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Service
 public class ArticleClient {
-    public static final String ARTICLE = "article";
+    private static final String ARTICLE = "article";
     private final RestTemplate restTemplate;
 
     public ArticleClient(RestTemplate restTemplate) {

@@ -22,7 +22,7 @@ class ArticleClientTest {
     @BeforeEach
     void setUp(WireMockRuntimeInfo wmRuntimeInfo) {
         WireMock wireMock = wmRuntimeInfo.getWireMock();
-        wireMock.loadMappingsFrom("/home/vboxuser/IdeaProjects/demo-jdriven");
+        wireMock.loadMappingsFrom("src");
         RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
         RestTemplate restTemplate = restTemplateBuilder.rootUri(wmRuntimeInfo.getHttpBaseUrl()).build();
         articleClient = new ArticleClient(restTemplate);

@@ -19,5 +19,5 @@ services:
   wiremock:
     image: "wiremock/wiremock:latest"
     volumes:
-      - ./mappings:/home/wiremock/mappings
+      - ./src/mappings:/home/wiremock/mappings
     entrypoint: [ "/docker-entrypoint.sh", "--global-response-templating", "--disable-gzip", "--verbose" ]

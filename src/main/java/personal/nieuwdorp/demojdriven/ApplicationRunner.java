@@ -4,8 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Service;
 import personal.nieuwdorp.demojdriven.client.ArticleClient;
+import personal.nieuwdorp.demojdriven.client.domain.Article;
 
-import java.util.UUID;
+import java.util.Collection;
 
 @Service
 @Slf4j
@@ -18,6 +19,7 @@ public class ApplicationRunner implements org.springframework.boot.ApplicationRu
 
     @Override
     public void run(ApplicationArguments args) {
-        log.info(articleClient.getSingle(UUID.randomUUID()).toString());
+        Collection<Article> articles = articleClient.getAll();
+        articles.stream().map(Article::toString).forEach(log::info);
     }
 }
