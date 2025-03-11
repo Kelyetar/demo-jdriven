@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import personal.nieuwdorp.demojdriven.controller.domain.ProductResponse;
-import personal.nieuwdorp.demojdriven.repository.ProductRepository;
+import personal.nieuwdorp.demojdriven.repository.ProductProvider;
 import personal.nieuwdorp.demojdriven.repository.domain.Product;
 
 import java.util.Arrays;
@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
 @CrossOrigin()
 @RestController
 public class ProductController {
-    private final ProductRepository productRepository;
+    private final ProductProvider productProvider;
 
-    public ProductController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductController(ProductProvider productProvider) {
+        this.productProvider = productProvider;
     }
 
     private static boolean matchesAllSearchTerms(Product product, String[] searchTerms) {
@@ -26,21 +26,17 @@ public class ProductController {
     }
 
     private static boolean stringMatchesAnyPartOfTheProductName(Product product, String term) {
-        return Arrays.stream(product.getName().toLowerCase().split("[^a-z]+")).anyMatch(namePart -> namePart.startsWith(term));
-    }
-
-    @GetMapping("/products")
-    Collection<ProductResponse> all() {
-        return productRepository.findAll().stream().map(this::convert).collect(Collectors.toList());
+        String[] nameParts = product.getName().toLowerCase().split("[^a-z]+");
+        return Arrays.stream(nameParts).anyMatch(namePart -> namePart.startsWith(term));
     }
 
     @GetMapping("/find-products")
     Collection<ProductResponse> find(@RequestParam(required = false) String queryString) {
         if (queryString == null) {
-            return productRepository.findAll().stream().map(this::convert).collect(Collectors.toList());
+            return productProvider.findAll().stream().map(this::convert).collect(Collectors.toList());
         } else {
             String[] searchTerms = queryString.toLowerCase().split("[^a-z]+");
-            return productRepository.findAll().stream().filter(product -> matchesAllSearchTerms(product, searchTerms)).map(this::convert).collect(Collectors.toList());
+            return productProvider.findAll().stream().filter(product -> matchesAllSearchTerms(product, searchTerms)).map(this::convert).collect(Collectors.toList());
         }
     }
 

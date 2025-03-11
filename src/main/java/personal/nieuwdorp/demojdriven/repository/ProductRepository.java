@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.UUID;
 
 @Repository
-public interface ProductRepository extends CrudRepository<Product, UUID> {
+interface ProductRepository extends CrudRepository<Product, UUID> {
     @Override
     @NonNull
     Collection<Product> findAll();

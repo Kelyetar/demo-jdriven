@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import personal.nieuwdorp.demojdriven.client.ProductClient;
 import personal.nieuwdorp.demojdriven.client.domain.Product;
-import personal.nieuwdorp.demojdriven.repository.ProductRepository;
+import personal.nieuwdorp.demojdriven.repository.ProductProvider;
 
 import java.math.RoundingMode;
 import java.util.Collection;
@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 @Component
 class ExternalSystemSyncTask implements Runnable {
     private final ProductClient productClient;
-    private final ProductRepository productRepository;
+    private final ProductProvider productProvider;
 
-    public ExternalSystemSyncTask(ProductClient productClient, ProductRepository productRepository) {
+    public ExternalSystemSyncTask(ProductClient productClient, ProductProvider productProvider) {
         this.productClient = productClient;
-        this.productRepository = productRepository;
+        this.productProvider = productProvider;
     }
 
     private static personal.nieuwdorp.demojdriven.repository.domain.Product createRepositoryProduct(Product productFromExternalSystem) {
@@ -31,6 +31,6 @@ class ExternalSystemSyncTask implements Runnable {
 
     public void run() {
         Collection<Product> products = productClient.getAll();
-        productRepository.saveAll(products.stream().map(ExternalSystemSyncTask::createRepositoryProduct).collect(Collectors.toSet()));
+        productProvider.saveAll(products.stream().map(ExternalSystemSyncTask::createRepositoryProduct).collect(Collectors.toSet()));
     }
 }
